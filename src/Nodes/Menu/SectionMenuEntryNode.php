@@ -1,12 +1,10 @@
 <?php
 
-declare(strict_types=1);
-
 namespace phpDocumentor\Guides\Nodes\Menu;
 
 use phpDocumentor\Guides\Nodes\TitleNode;
 
-final class InternalMenuEntryNode extends MenuEntryNode
+final class SectionMenuEntryNode extends MenuEntryNode
 {
     /** @var SectionMenuEntryNode[] */
     private array $sections = [];
@@ -19,9 +17,6 @@ final class InternalMenuEntryNode extends MenuEntryNode
         private readonly bool $isDocumentRoot = false,
         int $level = 1,
         private readonly string $anchor = '',
-        private readonly bool $isInRootline = false,
-        private readonly bool $isCurrent = false,
-        private readonly bool $isExternal = false,
     ) {
         parent::__construct($url, $title, $level);
     }
@@ -67,21 +62,6 @@ final class InternalMenuEntryNode extends MenuEntryNode
     public function addSection(SectionMenuEntryNode $section): void
     {
         $this->sections[] = $section;
-    }
-    
-    public function isInRootline(): bool
-    {
-        return $this->isInRootline;
-    }
-
-    public function isCurrent(): bool
-    {
-        return $this->isCurrent;
-    }
-
-    public function isExternal(): bool
-    {
-        return $this->isExternal;
     }
 
     public function __toString(): string

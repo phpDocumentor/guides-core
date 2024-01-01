@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace phpDocumentor\Guides\Compiler\NodeTransformers;
+namespace phpDocumentor\Guides\Compiler\NodeTransformers\MenuNodeTransformers;
 
 use phpDocumentor\Guides\Compiler\CompilerContext;
 use phpDocumentor\Guides\Compiler\NodeTransformer;
@@ -12,14 +12,12 @@ use phpDocumentor\Guides\Nodes\Menu\ContentMenuNode;
 use phpDocumentor\Guides\Nodes\Menu\InternalMenuEntryNode;
 use phpDocumentor\Guides\Nodes\Menu\TocNode;
 use phpDocumentor\Guides\Nodes\Node;
-
 use function assert;
 
 /** @implements NodeTransformer<TocNode> */
 class ContentMenuNodeWithSectionEntryTransformer implements NodeTransformer
 {
-    // Setting a default level prevents PHP errors in case of circular references
-    private const DEFAULT_MAX_LEVELS = 10;
+    private const DEFAULT_MAX_LEVELS = PHP_INT_MAX;
 
     public function enterNode(Node $node, CompilerContext $compilerContext): Node
     {
@@ -91,7 +89,7 @@ class ContentMenuNodeWithSectionEntryTransformer implements NodeTransformer
 
     public function supports(Node $node): bool
     {
-        return $node instanceof ContentMenuNode;
+        return false;
     }
 
     public function getPriority(): int
